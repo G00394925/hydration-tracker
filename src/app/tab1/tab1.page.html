@@ -1,14 +1,19 @@
 <ion-content>
   <div id="main-div">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>
-          <strong>Progress</strong>
+    <div id="progress-bar">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <strong>Progress</strong>
+          </ion-card-title>
           <ion-card-content>
-            <round-progress [current]="10" [max]="100"></round-progress>
+
+            <round-progress [current]="10" [max]="100" [color]="'#3688F2'" [background]="'#CECFD1'" [rounded]="true"
+              [radius]="100" [stroke]="23" />
+
           </ion-card-content>
-        </ion-card-title>
-      </ion-card-header>
-    </ion-card>
+        </ion-card-header>
+      </ion-card>
+    </div>
   </div>
 </ion-content>

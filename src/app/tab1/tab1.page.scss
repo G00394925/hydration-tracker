@@ -1,13 +1,26 @@
 #main-div {
-    margin: 5px;
     padding: 10px;
 }
 
+#progress-bar {
+    display: flex;
+    justify-content: center;
+}
+
 ion-card {
-    --background: white;
+    --background: rgb(255, 255, 255, 0.8);
     --border-radius: 10px;
-    --box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);}
+    --box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    width: 90% !important;
+}
 
 ion-card-title {
     --color: black;
+}
+
+ion-card-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
