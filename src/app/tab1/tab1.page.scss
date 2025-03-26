@@ -3,8 +3,20 @@
 }
 
 #progress-bar {
+    position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+#progress-number {
+    position: absolute;
+    font-size: 30px;
+    font-weight: bold;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 ion-card {
