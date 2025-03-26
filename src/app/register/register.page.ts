@@ -11,7 +11,9 @@ import { NavController } from '@ionic/angular';
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonInput, IonItem, IonList, IonButton]
 })
+
 export class RegisterPage implements OnInit {
+  // User input fields
   email: string = '';
   confirmEmail: string = '';
   password: string = '';
@@ -22,7 +24,9 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
+  // Verify that the user input is valid
   verifyAccount(): boolean {
+    // Details do not match
     if(this.email !== this.confirmEmail) {
       console.error('Emails do not match');
       return false;
@@ -33,6 +37,7 @@ export class RegisterPage implements OnInit {
       return false;
     }
 
+    // Details are left blank
     if(this.email === '' || this.confirmEmail === '' || this.password === '' || this.confirmPassword === '') {
       console.error('Please fill out all fields');
       return false;

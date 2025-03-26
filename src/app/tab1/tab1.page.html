@@ -1,12 +1,14 @@
-<ion-header [translucent]="true">
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+<ion-content>
+  <div id="main-div">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          <strong>Progress</strong>
+          <ion-card-content>
+            <round-progress [current]="10" [max]="100"></round-progress>
+          </ion-card-content>
+        </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </div>
 </ion-content>
