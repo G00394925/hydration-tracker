@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonInput, IonItem, IonList, IonButton } from '@ionic/angular/standalone';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -11,10 +12,39 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonInput, IonItem, IonList
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonInput, IonItem, IonList, IonButton]
 })
 export class RegisterPage implements OnInit {
+  email: string = '';
+  confirmEmail: string = '';
+  password: string = '';
+  confirmPassword: string = '';
 
-  constructor() { }
+  constructor(private navCtrl: NavController) { }
 
   ngOnInit() {
   }
 
+  verifyAccount(): boolean {
+    if(this.email !== this.confirmEmail) {
+      console.error('Emails do not match');
+      return false;
+    }
+
+    if(this.password !== this.confirmPassword) {
+      console.error('Passwords do not match');
+      return false;
+    }
+
+    if(this.email === '' || this.confirmEmail === '' || this.password === '' || this.confirmPassword === '') {
+      console.error('Please fill out all fields');
+      return false;
+    }
+
+    return true;
+  }
+
+  createAccount() {
+    if(this.verifyAccount()) {
+      console.log('Account created');
+      this.navCtrl.navigateForward('/tabs/tab1');
+    }
+  }
 }

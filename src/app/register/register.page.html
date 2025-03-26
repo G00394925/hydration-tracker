@@ -8,14 +8,15 @@
       Let's get started.<br /> 
       Enter your details below to create an account!
     </p>
+    <form (ngSubmit)="createAccount()">
+      <div id="user-details">
+          <ion-input [(ngModel)]="email" name="email" class="ion-margin-bottom" aria-label="Email" placeholder="Email" required></ion-input>
+          <ion-input [(ngModel)]="confirmEmail" name="confirmEmail" class="ion-margin-bottom" aria-label="Confirm Email" placeholder="Re-enter Email" required></ion-input>
+          <ion-input [(ngModel)]="password" name="password" class="ion-margin-bottom" aria-label="Password" placeholder="Password" type="Password" required></ion-input>
+          <ion-input [(ngModel)]="confirmPassword" name="confirmPassword" class="ion-margin-bottom" aria-label="Confirm Password" placeholder="Re-enter Password" type="Password" required></ion-input>
 
-    <div id="user-details">
-        <ion-input class="ion-margin-bottom" aria-label="Email" placeholder="Email"></ion-input>
-        <ion-input class="ion-margin-bottom" aria-label="Confirm Email" placeholder="Re-enter Email"></ion-input>
-        <ion-input class="ion-margin-bottom" aria-label="Password" placeholder="Password" type="Password"></ion-input>
-        <ion-input class="ion-margin-bottom" aria-label="Confirm Password" placeholder="Re-enter Password" type="Password"></ion-input>
-
-        <ion-button expand="full" color="primary">Register</ion-button>
-    </div>
+          <ion-button expand="full" type="submit" color="primary">Register</ion-button>
+      </div>
+    </form>
   </div>
 </ion-content>
