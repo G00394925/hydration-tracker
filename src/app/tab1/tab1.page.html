@@ -2,20 +2,23 @@
   <div id="main-div">
     <!-- Daily progress bar -->
     <ion-card>
-      <ion-card-header>
-        <ion-card-title>
-          <strong>Progress</strong>
-        </ion-card-title>
+
         <ion-card-content>
           <div id="progress-bar">
             <div id="progress-number">
               10%
             </div>
-            <round-progress [current]="10" [max]="100" [color]="'#3688F2'" [background]="'#CECFD1'" [rounded]="true"
-              [radius]="100" [stroke]="23" />
+            <round-progress 
+              [current]="10" 
+              [max]="100"
+              [color]="'#3688F2'"
+              [background]="'#CECFD1'"
+              [rounded]="true"
+              [radius]="100"
+              [stroke]="23"
+            />
             </div>
           </ion-card-content>
-        </ion-card-header>
       </ion-card>
 
       <!-- "Add drink" section -->
@@ -26,13 +29,13 @@
         <ion-card-content>
           <ion-grid>
             <ion-row>
-              <ion-col>
+              <ion-col size="6">
                 <ion-button expand="block">200ml</ion-button>
               </ion-col>
-              <ion-col>
+              <ion-col size="6">
                 <ion-button expand="block">330ml</ion-button>
               </ion-col>
-              <ion-col>
+              <ion-col size="6">
                 <ion-button expand="block">500ml</ion-button>
               </ion-col>
             </ion-row>
