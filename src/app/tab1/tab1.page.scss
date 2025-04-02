@@ -1,5 +1,7 @@
 #main-div {
+    display: flex;
     padding: 10px;
+    margin: 15px;
 }
 
 #progress-bar {
@@ -20,9 +22,11 @@
 }
 
 ion-card {
-    --background: rgb(255, 255, 255, 0.8);
-    --border-radius: 10px;
+    --background: rgb(255, 255, 255);
     --box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    display: flex !important;
+    margin: auto;
     width: 90% !important;
 }
 
