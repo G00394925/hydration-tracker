@@ -36,7 +36,7 @@
 ion-card {
     --background: rgb(255, 255, 255);
     --box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 25px;
+    border-radius: 15px;
     width: 100% !important;
     margin: 8px auto !important;
 }
@@ -63,6 +63,10 @@ ion-card-content {
 ion-grid {
     padding: 0;
     width: 100%;
+}
+
+ion-row {
+    margin: 10px auto;
 }
 
 ion-button {
