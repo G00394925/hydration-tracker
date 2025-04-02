@@ -5,11 +5,11 @@
       <ion-card-content>
         <div id="progress-bar">
           <div id="progress-number">
-            10%
+            {{progressPercentage}}
           </div>
           <round-progress 
-            [current]="10" 
-            [max]="100"
+            [current]="currentProgress" 
+            [max]="dailyGoal"
             [color]="'#3688F2'"
             [background]="'#CECFD1'"
             [rounded]="true"
@@ -33,13 +33,13 @@
                 <ion-grid>
                   <ion-col>
                     <ion-row>
-                      <ion-button expand=>200ml</ion-button>
+                      <ion-button expand="block" (click)="addProgress(200)">200ml</ion-button>
                     </ion-row>
                     <ion-row>
-                      <ion-button expand="block">330ml</ion-button>
+                      <ion-button expand="block" (click)="addProgress(330)">330ml</ion-button>
                     </ion-row>
                     <ion-row>
-                      <ion-button expand="block">500ml</ion-button>
+                      <ion-button expand="block" (click)="addProgress(500)">500ml</ion-button>
                     </ion-row>
                   </ion-col>
                 </ion-grid>
