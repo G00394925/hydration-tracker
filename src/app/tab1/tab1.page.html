@@ -2,45 +2,64 @@
   <div id="main-div">
     <!-- Daily progress bar -->
     <ion-card>
-
-        <ion-card-content>
-          <div id="progress-bar">
-            <div id="progress-number">
-              10%
-            </div>
-            <round-progress 
-              [current]="10" 
-              [max]="100"
-              [color]="'#3688F2'"
-              [background]="'#CECFD1'"
-              [rounded]="true"
-              [radius]="100"
-              [stroke]="23"
+      <ion-card-content>
+        <div id="progress-bar">
+          <div id="progress-number">
+            10%
+          </div>
+          <round-progress 
+            [current]="10" 
+            [max]="100"
+            [color]="'#3688F2'"
+            [background]="'#CECFD1'"
+            [rounded]="true"
+            [radius]="100"
+            [stroke]="23"
             />
-            </div>
-          </ion-card-content>
-      </ion-card>
-
-      <!-- "Add drink" section -->
-       <ion-card>
-        <ion-card-header>
-          <ion-card-title>Add Drink</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="6">
-                <ion-button expand="block">200ml</ion-button>
-              </ion-col>
-              <ion-col size="6">
-                <ion-button expand="block">330ml</ion-button>
-              </ion-col>
-              <ion-col size="6">
-                <ion-button expand="block">500ml</ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
+          </div>
         </ion-card-content>
-       </ion-card>
+      </ion-card>
+      
+      <!-- Container grid -->
+      <ion-grid>
+        <ion-row>
+          <!-- Add drink section -->
+          <ion-col>
+            <ion-card id="drink-card">
+              <ion-card-header>
+                <ion-card-title>Add Drink</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-grid>
+                  <ion-col>
+                    <ion-row>
+                      <ion-button expand=>200ml</ion-button>
+                    </ion-row>
+                    <ion-row>
+                      <ion-button expand="block">330ml</ion-button>
+                    </ion-row>
+                    <ion-row>
+                      <ion-button expand="block">500ml</ion-button>
+                    </ion-row>
+                  </ion-col>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+        </ion-col>
+
+        <ion-col>
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Today's statss</ion-card-title>
+            </ion-card-header>
+            
+            <ion-card-content>
+            
+            </ion-card-content>
+            </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
   </div>
 </ion-content>
