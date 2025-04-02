@@ -1,7 +1,9 @@
 #main-div {
     display: flex;
+    flex-direction: column;
     padding: 10px;
     margin: 15px;
+    height: 100%;
 }
 
 #progress-bar {
