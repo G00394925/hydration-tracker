@@ -14,12 +14,17 @@ import { NgModel } from '@angular/forms';
 export class Tab1Page {
   dailyGoal: number = 2000; // Recommended daily intake is 2L by default
   currentProgress: number = 0;
-  progressPercentage: number = 0; 
+  progressPercentage: number = 0;
+  maxPercentage: number = 100;
 
   constructor() {}
 
   addProgress(amount: number) {
     this.currentProgress += amount
-    this.progressPercentage = (this.currentProgress / this.dailyGoal) * 100; 
+    this.progressPercentage = (this.currentProgress / this.dailyGoal) * 100;
+    
+    if (this.progressPercentage > 100) {
+      this.progressPercentage = 100;
+    }
   }
 }
