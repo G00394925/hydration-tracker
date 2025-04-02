@@ -21,7 +21,7 @@ export class Tab1Page {
 
   addProgress(amount: number) {
     this.currentProgress += amount
-    this.progressPercentage = (this.currentProgress / this.dailyGoal) * 100;
+    this.progressPercentage = Math.floor((this.currentProgress / this.dailyGoal) * 100);
     
     if (this.progressPercentage > 100) {
       this.progressPercentage = 100;
