@@ -73,3 +73,15 @@ ion-button {
     margin: 0.5rem, 0;
     width: 100%;
 }
+
+ion-list { 
+    --background: white;
+    width: 100%;
+    margin: 8px auto !important;
+}
+
+ion-item {
+    --background: white;
+    --color: black;
+    font-size: 14px;
+}
