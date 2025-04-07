@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { IonHeader, IonToolbar, IonList, IonItem, IonTitle, IonContent, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonGrid, IonRow, IonCol, IonButton } from '@ionic/angular/standalone';
+import { IonHeader, IonBadge, IonLabel, IonToolbar, IonList, IonItem, IonTitle, IonContent, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonGrid, IonRow, IonCol, IonButton } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { NgModel } from '@angular/forms';
@@ -8,7 +8,7 @@ import { NgModel } from '@angular/forms';
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  imports: [RoundProgressModule, IonList, IonItem, IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonGrid, IonRow, IonCol, IonButton],
+  imports: [RoundProgressModule, IonBadge, IonLabel, IonList, IonItem, IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonGrid, IonRow, IonCol, IonButton],
 })
 
 export class Tab1Page {
@@ -28,9 +28,12 @@ export class Tab1Page {
     this.windowHeight = window.innerHeight;
   }
 
+  // Change radius of progress circle based on screen size
   calculateRadius(): number {
+    // Smaller screens
     if(this.windowWidth < 360 || this.windowHeight < 800) {
       return 70;
+    // Medium screens
     } else if (this.windowWidth < 480) {
       return 100;
     } else {
@@ -39,8 +42,9 @@ export class Tab1Page {
   }
 
   calculateStroke(): number {
+    // Calculate stroke width based on radius
     const radius = this.calculateRadius();
-    return Math.max(Math.floor(radius * 0.2), 15)
+    return Math.max(Math.floor(radius * 0.2), 15) // 15 = Minimum stroke width
   }
 
   addProgress(amount: number) {
