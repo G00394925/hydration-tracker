@@ -1,7 +1,7 @@
 {
-  "name": "hydration-tracker",
+  "name": "Hydration Tracker",
   "integrations": {
     "capacitor": {}
   },
-  "type": "angular-standalone"
+  "type": "angular"
 }
