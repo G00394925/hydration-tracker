@@ -16,6 +16,7 @@ export class Tab1Page {
   currentProgress: number = 0;
   progressPercentage: number = 0;
   maxPercentage: number = 100;
+  lastDrink: string = "";
 
   windowWidth: number = window.innerWidth;
   windowHeight: number = window.innerHeight;
@@ -54,7 +55,13 @@ export class Tab1Page {
     if (this.progressPercentage > 100) {
       this.progressPercentage = 100;
     }
+    this.lastDrink = (this.getLastDrink());
   }
 
-
+  getLastDrink(): string {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    return (hours + ":" + minutes);
+  }
 }
