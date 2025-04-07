@@ -17,6 +17,7 @@ export class Tab1Page {
   progressPercentage: number = 0;
   maxPercentage: number = 100;
   lastDrink: string = "";
+  todaysDrinks: number = 0;
 
   windowWidth: number = window.innerWidth;
   windowHeight: number = window.innerHeight;
@@ -56,6 +57,7 @@ export class Tab1Page {
       this.progressPercentage = 100;
     }
     this.lastDrink = (this.getLastDrink());
+    this.todaysDrinks += 1;
   }
 
   getLastDrink(): string {
