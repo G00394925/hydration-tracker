@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { IonHeader, IonToolbar, IonList, IonItem, IonTitle, IonContent, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonGrid, IonRow, IonCol, IonButton } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
@@ -17,7 +17,31 @@ export class Tab1Page {
   progressPercentage: number = 0;
   maxPercentage: number = 100;
 
+  windowWidth: number = window.innerWidth;
+  windowHeight: number = window.innerHeight;
+
   constructor() {}
+
+  @HostListener('window:resize')
+  onResize() {
+    this.windowWidth = window.innerWidth;
+    this.windowHeight = window.innerHeight;
+  }
+
+  calculateRadius(): number {
+    if(this.windowWidth < 360 || this.windowHeight < 800) {
+      return 70;
+    } else if (this.windowWidth < 480) {
+      return 100;
+    } else {
+      return 150;
+    }
+  }
+
+  calculateStroke(): number {
+    const radius = this.calculateRadius();
+    return Math.max(Math.floor(radius * 0.2), 15)
+  }
 
   addProgress(amount: number) {
     this.currentProgress += amount
@@ -27,4 +51,6 @@ export class Tab1Page {
       this.progressPercentage = 100;
     }
   }
+
+
 }

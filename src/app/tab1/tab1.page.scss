@@ -6,6 +6,7 @@
     gap: 1rem;
     margin: 0px auto;
     height: 100%;
+    max-height: 1000px;
     max-width: 600px;
 }
 
@@ -33,6 +34,10 @@
     padding-top: 0 !important;
 }
 
+.stats-card {
+    background-color: white !important;
+
+}
 ion-card {
     --background: rgb(255, 255, 255);
     --box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
@@ -87,3 +92,15 @@ ion-item {
     --color: black;
     font-size: 14px;
 }
+
+@media (min-width: 768px) {
+    #progress-number {
+      font-size: calc(1.8rem + 1.5vw);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    #progress-number {
+      font-size: calc(2rem + 1vw);
+    }
+  }

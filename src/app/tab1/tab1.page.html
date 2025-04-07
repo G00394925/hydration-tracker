@@ -16,18 +16,15 @@
             [color]="'#3688F2'"
             [background]="'#CECFD1'"
             [rounded]="true"
-            [radius]="100"
-            [stroke]="23"
+            [radius]="calculateRadius()"
+            [stroke]="calculateStroke()"
             />
           </div>
         </ion-card-content>
       </ion-card>
       
       <!-- Container grid -->
-      <ion-grid>
-        <ion-row>
           <!-- Add drink section -->
-          <ion-col>
             <ion-card id="drink-card">
               <ion-card-header>
                 <ion-card-title>Add Drink</ion-card-title>
@@ -48,25 +45,19 @@
                 </ion-grid>
               </ion-card-content>
             </ion-card>
-        </ion-col>
 
-        <ion-col>
           <ion-card>
             <ion-card-header>
               <ion-card-title>Today's stats</ion-card-title>
             </ion-card-header>
             
             <ion-card-content>
-              <ion-list>
+              <ion-list class="stats-card">
                 <ion-item>Current Progress: {{currentProgress}} ml of {{dailyGoal}} ml</ion-item>
 
               </ion-list>
 
             </ion-card-content>
             </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
   </div>
 </ion-content>
