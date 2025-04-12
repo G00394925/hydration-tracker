@@ -23,16 +23,13 @@ export class Tab1Page implements OnInit {
   windowWidth: number = window.innerWidth;
   windowHeight: number = window.innerHeight;
 
-  constructor(private dailyStorage : StorageService) {}
+  constructor(private dailyStorage : StorageService) {
 
-  ngOnInit() {
-    this.loadProgress();
-    console.log('Loaded values:', {
-      currentProgress: this.currentProgress,
-      todaysDrinks: this.todaysDrinks,
-      lastDrink: this.lastDrink,
-      progressPercentage: this.progressPercentage
-    });
+  }
+
+  async ngOnInit() {
+    await this.dailyStorage.init(); // Initialize storage
+    this.loadProgress(); // Load progress from storage
   }
 
   @HostListener('window:resize')
@@ -61,28 +58,39 @@ export class Tab1Page implements OnInit {
   }
 
   async loadProgress() {
+    // Get progress from storage
     this.currentProgress = await this.dailyStorage.get('currentProgress') || 0;
     this.todaysDrinks = await this.dailyStorage.get('todaysDrinks') || 0;
     this.lastDrink = await this.dailyStorage.get('lastDrink');
-    this.progressPercentage = Math.floor((this.currentProgress / this.dailyGoal) * 100) || 0;
+
+    // Make sure percetnage does not exceed 100% on load
+    if (Math.floor((this.currentProgress / this.dailyGoal) * 100) > 100) {
+      this.progressPercentage = 100;
+    } else {
+      this.progressPercentage = Math.floor((this.currentProgress / this.dailyGoal) * 100) || 0;
+    }
   }
 
   async addProgress(amount: number) {
-    this.currentProgress += amount
-    this.progressPercentage = Math.floor((this.currentProgress / this.dailyGoal) * 100);
+    this.currentProgress += amount  // Add amount onto current progress
+    this.progressPercentage = Math.floor((this.currentProgress / this.dailyGoal) * 100);  // Convert progress to percentage
 
+    // Make sure percentage does not exceed 100%
     if (this.progressPercentage > 100) {
       this.progressPercentage = 100;
     }
-    this.lastDrink = (this.getLastDrink());
-    this.todaysDrinks += 1;
 
+    this.lastDrink = (this.getLastDrink());  // Get last drink time
+    this.todaysDrinks += 1;  // Increment number of drinks today
+
+    // Save all progress to storage
     await this.dailyStorage.set('lastDrink', this.lastDrink);
     await this.dailyStorage.set('todaysDrinks', this.todaysDrinks);
     await this.dailyStorage.set('currentProgress', this.currentProgress);
   }
 
   getLastDrink(): string {
+    // Get time of last drink in HH:MM format
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
