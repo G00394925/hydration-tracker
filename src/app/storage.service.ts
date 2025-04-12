@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage-angular';
 @Injectable({
   providedIn: 'root'
 })
-export class StorageServiceService {
+export class StorageService {
   private _storage  : Storage | null = null;
 
   constructor(private storage: Storage) {
