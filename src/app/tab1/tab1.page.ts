@@ -23,19 +23,18 @@ export class Tab1Page implements OnInit {
   windowWidth: number = window.innerWidth;
   windowHeight: number = window.innerHeight;
 
-  constructor(private dailyStorage : StorageService) {
-
-  }
+  constructor(private dailyStorage : StorageService) {}
 
   async ngOnInit() {
     await this.dailyStorage.init(); // Initialize storage
     this.loadProgress(); // Load progress from storage
   }
 
+  // Update window dimensions on resize to change size of progress circle
   @HostListener('window:resize')
   onResize() {
-    this.windowWidth = window.innerWidth;
-    this.windowHeight = window.innerHeight;
+    this.windowWidth = window.innerWidth;  // Update window width
+    this.windowHeight = window.innerHeight;  // Update window height
   }
 
   // Change radius of progress circle based on screen size
@@ -57,6 +56,12 @@ export class Tab1Page implements OnInit {
     return Math.max(Math.floor(radius * 0.2), 15) // 15 = Minimum stroke width
   }
 
+  clearProgress() {
+    this.dailyStorage.clear(); // Clear all progress from storage
+    this.currentProgress = 0;
+    this.todaysDrinks = 0;
+    this.progressPercentage = 0;
+  }
   async loadProgress() {
     // Get progress from storage
     this.currentProgress = await this.dailyStorage.get('currentProgress') || 0;

@@ -26,4 +26,8 @@ export class StorageService {
   public get(key: string) {
     return this._storage?.get(key);
   }
+
+  public clear() {
+    this._storage?.clear();
+  }
 }

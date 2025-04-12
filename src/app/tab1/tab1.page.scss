@@ -85,7 +85,7 @@ ion-button {
     width: 100%;
 }
 
-ion-list { 
+ion-list {
     --background: white;
     width: 100%;
     margin: 8px auto !important;
@@ -102,9 +102,19 @@ ion-item {
       font-size: calc(1.8rem + 1.5vw);
     }
   }
-  
+
   @media (min-width: 1024px) {
     #progress-number {
       font-size: calc(2rem + 1vw);
     }
   }
+
+#debug-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1;
+  height: 25px;
+  width: 25px;
+
+}

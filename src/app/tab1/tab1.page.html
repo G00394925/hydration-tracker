@@ -13,13 +13,13 @@
       </ion-card-content>
     </ion-card>
 
-    
+
     <!-- Today's stats -->
     <ion-card>
       <ion-card-header>
         <ion-card-title>Today's stats</ion-card-title>
       </ion-card-header>
-      
+
       <ion-card-content>
         <ion-list class="stats-card">
           <ion-item>
@@ -35,10 +35,10 @@
             <ion-badge slot="end">{{todaysDrinks}}</ion-badge>
           </ion-item>
         </ion-list>
-        
+
       </ion-card-content>
     </ion-card>
- 
+
     <!-- Add drink section -->
     <ion-card id="drink-card">
       <ion-card-header>
@@ -60,5 +60,7 @@
         </ion-grid>
       </ion-card-content>
     </ion-card>
+    <!-- DEBUG -->
+    <ion-button id="debug-button" (click)="clearProgress()" >C</ion-button>
   </div>
 </ion-content>
