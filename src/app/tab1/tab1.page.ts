@@ -56,12 +56,22 @@ export class Tab1Page implements OnInit {
     return Math.max(Math.floor(radius * 0.2), 15) // 15 = Minimum stroke width
   }
 
+  getColor(): string {
+    if(this.progressPercentage >= 100) {
+      return 'rgb(39, 212, 39)'; // Green color for 100%
+    } else {
+      return '#3688F2'; // Default color
+    }
+
+  }
+
   clearProgress() {
     this.dailyStorage.clear(); // Clear all progress from storage
     this.currentProgress = 0;
     this.todaysDrinks = 0;
     this.progressPercentage = 0;
   }
+
   async loadProgress() {
     // Get progress from storage
     this.currentProgress = await this.dailyStorage.get('currentProgress') || 0;

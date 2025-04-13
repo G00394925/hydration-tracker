@@ -7,7 +7,7 @@
           <div id="progress-number">
             {{progressPercentage}}
           </div>
-          <round-progress [current]="currentProgress" [max]="dailyGoal" [color]="'#3688F2'" [background]="'#CECFD1'"
+          <round-progress [current]="currentProgress" [max]="dailyGoal" [color]="getColor()" [background]="'#CECFD1'"
             [rounded]="true" [radius]="calculateRadius()" [stroke]="calculateStroke()" />
         </div>
       </ion-card-content>

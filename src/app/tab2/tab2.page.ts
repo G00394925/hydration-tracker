@@ -1,7 +1,9 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
-import { IonHeader, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { IonHeader, IonCard, IonCardHeader, IonIcon, IonCardTitle, IonCardContent, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
+import { addIcons } from 'ionicons';
+import { flame } from 'ionicons/icons';
 
 Chart.register(...registerables);
 
@@ -9,13 +11,15 @@ Chart.register(...registerables);
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  imports: [IonHeader, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonTitle, IonContent, ExploreContainerComponent]
+  imports: [IonHeader, IonToolbar, IonCard, IonCardHeader, IonIcon, IonCardTitle, IonCardContent, IonTitle, IonContent, ExploreContainerComponent]
 })
 export class Tab2Page implements AfterViewInit {
   @ViewChild('myChart') myChart: ElementRef | undefined;
   chart: any;
 
-  constructor() {}
+  constructor() {
+    addIcons({ flame })
+  }
 
   ngAfterViewInit(): void {
       this.createChart();
@@ -43,6 +47,15 @@ export class Tab2Page implements AfterViewInit {
                 display: true,
                 text: 'Water Intake (ml)'
               }
+            }
+          },
+          animations: {
+            tension: {
+              duration: 1000,
+              easing: 'linear',
+              from: 0,
+              to: 0,
+              loop: false
             }
           }
         }
