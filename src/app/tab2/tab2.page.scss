@@ -21,10 +21,8 @@
 
 #flame-icon {
   color: #3688F2;
-  font-size: 25px;
-  position: absolute;
-  left: 0;
-  top: 0;
+  font-size: 35px;
+  margin-top: 20px;
 }
 
 #streak-counter-card ion-card-header {
@@ -47,5 +45,10 @@ ion-card-header {
 }
 
 ion-card-title {
+  margin-top: 5px;
+  --color: black;
+}
+
+ion-card-content {
   --color: black;
 }
