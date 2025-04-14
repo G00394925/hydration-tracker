@@ -23,6 +23,8 @@ export class Tab2Page implements AfterViewInit {
   progressPercentage: number = 0;
   todaysDrinks: number = 0;
   lastDrink: string = '';
+  currentStreak: number = 0;
+  maxStreak: number = 0;
 
   constructor(private storageService: StorageService) {
     addIcons({ flame, trophy })
@@ -42,6 +44,8 @@ export class Tab2Page implements AfterViewInit {
     this.todaysDrinks = await this.storageService.get('todaysDrinks') || 0;
     this.lastDrink = await this.storageService.get('lastDrink');
     this.progressPercentage = (this.currentProgress / this.dailyGoal);
+    this.currentStreak = await this.storageService.get('currentStreak') || 0;
+    this.maxStreak = await this.storageService.get('maxStreak') || 0;
   }
 
   ngAfterViewInit(): void {

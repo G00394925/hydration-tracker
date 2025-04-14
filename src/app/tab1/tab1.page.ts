@@ -17,14 +17,16 @@ export class Tab1Page implements OnInit {
   maxPercentage: number = 100;
   lastDrink: string = "";
   todaysDrinks: number = 0;
+  currentStreak: number = 0;
+  maxStreak: number = 0;
 
   windowWidth: number = window.innerWidth;
   windowHeight: number = window.innerHeight;
 
-  constructor(private dailyStorage : StorageService) {}
+  constructor(private storageService : StorageService) {}
 
   async ngOnInit() {
-    await this.dailyStorage.init(); // Initialize storage
+    await this.storageService.init(); // Initialize storage
     this.loadProgress(); // Load progress from storage
   }
 
@@ -60,11 +62,10 @@ export class Tab1Page implements OnInit {
     } else {
       return '#3688F2'; // Default color
     }
-
   }
 
   clearProgress() {
-    this.dailyStorage.clear(); // Clear all progress from storage
+    this.storageService.clear(); // Clear all progress from storage
     this.currentProgress = 0;
     this.todaysDrinks = 0;
     this.progressPercentage = 0;
@@ -72,9 +73,9 @@ export class Tab1Page implements OnInit {
 
   async loadProgress() {
     // Get progress from storage
-    this.currentProgress = await this.dailyStorage.get('currentProgress') || 0;
-    this.todaysDrinks = await this.dailyStorage.get('todaysDrinks') || 0;
-    this.lastDrink = await this.dailyStorage.get('lastDrink');
+    this.currentProgress = await this.storageService.get('currentProgress') || 0;
+    this.todaysDrinks = await this.storageService.get('todaysDrinks') || 0;
+    this.lastDrink = await this.storageService.get('lastDrink');
 
     // Make sure percetnage does not exceed 100% on load
     if (Math.floor((this.currentProgress / this.dailyGoal) * 100) > 100) {
@@ -96,10 +97,14 @@ export class Tab1Page implements OnInit {
     this.lastDrink = (this.getLastDrink());  // Get last drink time
     this.todaysDrinks += 1;  // Increment number of drinks today
 
+    if(this.currentProgress >= this.dailyGoal) {
+      this.updateStreak();  // Update streak if goal is met
+    }
+
     // Save all progress to storage
-    await this.dailyStorage.set('lastDrink', this.lastDrink);
-    await this.dailyStorage.set('todaysDrinks', this.todaysDrinks);
-    await this.dailyStorage.set('currentProgress', this.currentProgress);
+    await this.storageService.set('lastDrink', this.lastDrink);
+    await this.storageService.set('todaysDrinks', this.todaysDrinks);
+    await this.storageService.set('currentProgress', this.currentProgress);
   }
 
   getLastDrink(): string {
@@ -108,5 +113,15 @@ export class Tab1Page implements OnInit {
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
     return (hours + ":" + minutes);
+  }
+
+  updateStreak() {
+    this.currentStreak += 1;
+
+    if(this.currentStreak > this.maxStreak) {
+      this.maxStreak = this.currentStreak;
+    }
+    this.storageService.set('currentStreak', this.currentStreak);
+    this.storageService.set('maxStreak', this.maxStreak);
   }
 }
