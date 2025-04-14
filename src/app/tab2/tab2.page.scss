@@ -19,15 +19,22 @@
   gap: 1rem;
 }
 
-#flame-icon {
+#icon {
   color: #3688F2;
-  font-size: 35px;
+  font-size: 40px;
   margin-top: 20px;
+  margin-bottom: 10px;  
 }
 
-#streak-counter-card ion-card-header {
+#streak-info-card ion-card-header {
+  margin-top: 10px;
   padding-top: 0px;
   padding-bottom: 0px;
+}
+
+#streak-variable {
+  color: #3688F2;
+  padding-bottom: 10px;
 }
 
 ion-card {

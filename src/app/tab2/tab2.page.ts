@@ -3,7 +3,7 @@ import { Chart, registerables } from 'chart.js';
 import { IonHeader, IonCard, IonCardHeader, IonIcon, IonCardTitle, IonCardContent, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { addIcons } from 'ionicons';
-import { flame } from 'ionicons/icons';
+import { flame, trophy } from 'ionicons/icons';
 
 Chart.register(...registerables);
 
@@ -11,14 +11,14 @@ Chart.register(...registerables);
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  imports: [IonHeader, IonToolbar, IonCard, IonCardHeader, IonIcon, IonCardTitle, IonCardContent, IonTitle, IonContent, ExploreContainerComponent]
+  imports: [IonCard, IonCardHeader, IonIcon, IonCardTitle, IonCardContent, IonContent,]
 })
 export class Tab2Page implements AfterViewInit {
   @ViewChild('myChart') myChart: ElementRef | undefined;
   chart: any;
 
   constructor() {
-    addIcons({ flame })
+    addIcons({ flame, trophy })
   }
 
   ngAfterViewInit(): void {
