@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonInput, IonItem, IonList, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonInput, IonButton } from '@ionic/angular/standalone';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -9,7 +9,7 @@ import { NavController } from '@ionic/angular';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonInput, IonItem, IonList, IonButton]
+  imports: [IonContent, IonHeader, IonTitle, CommonModule, FormsModule, IonInput, IonButton]
 })
 
 export class RegisterPage implements OnInit {

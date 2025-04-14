@@ -49,7 +49,7 @@ export class Tab2Page implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-      this.createChart();
+    this.createChart();
   }
 
   createChart() {

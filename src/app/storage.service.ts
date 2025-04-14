@@ -30,4 +30,8 @@ export class StorageService {
   public clear() {
     this._storage?.clear();
   }
+
+  public remove(key: string) {
+    this._storage?.remove(key);
+  }
 }

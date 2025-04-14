@@ -65,7 +65,9 @@ export class Tab1Page implements OnInit {
   }
 
   clearProgress() {
-    this.storageService.clear(); // Clear all progress from storage
+    this.storageService.remove('currentProgress'); // Remove current progress from storage
+    this.storageService.remove('todaysDrinks'); // Remove todays drinks from storage
+
     this.currentProgress = 0;
     this.todaysDrinks = 0;
     this.progressPercentage = 0;
