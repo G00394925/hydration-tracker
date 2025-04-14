@@ -37,6 +37,15 @@
   padding-bottom: 10px;
 }
 
+#todays-progress {
+  width: 100%;
+}
+
+ion-progress-bar {
+  height: 10px;
+  margin-bottom: 5px;
+}
+
 ion-card {
   --background: rgb(255, 255, 255);
   --box-shadow: none;

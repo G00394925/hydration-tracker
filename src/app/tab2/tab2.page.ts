@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
-import { IonHeader, IonCard, IonCardHeader, IonIcon, IonCardTitle, IonCardContent, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
+import { StorageService } from '../storage.service';
+import { IonCard, IonCardHeader, IonIcon, IonCardTitle, IonCardContent, IonContent, IonProgressBar } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { flame, trophy } from 'ionicons/icons';
 
@@ -11,14 +11,37 @@ Chart.register(...registerables);
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  imports: [IonCard, IonCardHeader, IonIcon, IonCardTitle, IonCardContent, IonContent,]
+  imports: [IonProgressBar, IonCard, IonCardHeader, IonIcon, IonCardTitle, IonCardContent, IonContent,]
 })
 export class Tab2Page implements AfterViewInit {
   @ViewChild('myChart') myChart: ElementRef | undefined;
   chart: any;
 
-  constructor() {
+  // Variables for progress data
+  currentProgress: number = 0;
+  dailyGoal: number = 2000;
+  progressPercentage: number = 0;
+  todaysDrinks: number = 0;
+  lastDrink: string = '';
+
+  constructor(private storageService: StorageService) {
     addIcons({ flame, trophy })
+  }
+
+  async ngOnInit() {
+    await this.loadProgress(); // Load progress from storage
+  }
+
+  async ionViewWillEnter() {
+    await this.loadProgress();
+  }
+
+  async loadProgress() {
+    // Get progress from storage
+    this.currentProgress = await this.storageService.get('currentProgress') || 0;
+    this.todaysDrinks = await this.storageService.get('todaysDrinks') || 0;
+    this.lastDrink = await this.storageService.get('lastDrink');
+    this.progressPercentage = (this.currentProgress / this.dailyGoal);
   }
 
   ngAfterViewInit(): void {

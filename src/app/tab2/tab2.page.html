@@ -9,6 +9,18 @@
       </ion-card-content>
     </ion-card>
 
+    <div id="todays-progress">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Today's Progress</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-progress-bar value={{progressPercentage}}></ion-progress-bar>
+          <span>{{currentProgress}}ml / 2000ml</span>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
     <div id="streak-div">
       <ion-card id="streak-info-card">
         <ion-card-header>
