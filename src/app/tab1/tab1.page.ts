@@ -27,7 +27,13 @@ export class Tab1Page implements OnInit {
 
   async ngOnInit() {
     await this.storageService.init(); // Initialize storage
+    await this.checkForDayChange(); // Check if the day has changed
     this.loadProgress(); // Load progress from storage
+  }
+
+  async ionViewWillEnter() {
+    await this.checkForDayChange();
+    await this.loadProgress();
   }
 
   // Update window dimensions on resize to change size of progress circle
@@ -88,6 +94,7 @@ export class Tab1Page implements OnInit {
   }
 
   async addProgress(amount: number) {
+    const previousProgress = this.currentProgress; 
     this.currentProgress += amount  // Add amount onto current progress
     this.progressPercentage = Math.floor((this.currentProgress / this.dailyGoal) * 100);  // Convert progress to percentage
 
@@ -99,7 +106,8 @@ export class Tab1Page implements OnInit {
     this.lastDrink = (this.getLastDrink());  // Get last drink time
     this.todaysDrinks += 1;  // Increment number of drinks today
 
-    if(this.currentProgress >= this.dailyGoal) {
+    if(previousProgress < this.dailyGoal && this.currentProgress >= this.dailyGoal) {
+      await this.storageService.set('metGoal', true);  // Set goal met flag in storage
       this.updateStreak();  // Update streak if goal is met
     }
 
@@ -118,6 +126,7 @@ export class Tab1Page implements OnInit {
   }
 
   updateStreak() {
+    
     this.currentStreak += 1;
 
     if(this.currentStreak > this.maxStreak) {
@@ -125,5 +134,32 @@ export class Tab1Page implements OnInit {
     }
     this.storageService.set('currentStreak', this.currentStreak);
     this.storageService.set('maxStreak', this.maxStreak);
+  }
+
+  async checkForDayChange() {
+    const lastDate = await this.storageService.get('lastDate');
+    const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+
+    // Day has changed, reset progress
+    if(lastDate !== today) {
+      console.log("It's a new day!")
+
+      // Check that yesterday's goal was met
+      const metGoalYesterday = await this.storageService.get('metGoal');
+
+      // Goal wasn't met -- reset streak
+      if(!metGoalYesterday) {
+        this.currentStreak = 0;
+        await this.storageService.set('currentStreak', 0);
+      }
+
+      this.clearProgress(); // Clear progress for the new day
+
+      // Reset goal met flag
+      await this.storageService.set('metGoal', false)
+
+      // Update last date in storage
+      await this.storageService.set('lastDate', today);
+    }
   }
 }
