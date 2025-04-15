@@ -1,12 +1,17 @@
-<ion-header [translucent]="true">
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div id="main-div">
+    <ion-card id="settings-container">
+      <ion-card-header>
+        <ion-card-title>Settings</ion-card-title>
+      </ion-card-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Daily Intake Goal</ion-label>
+          <ion-input type="number" placeholder="2000"></ion-input>
+          <ion-note slot="end">ml</ion-note>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
