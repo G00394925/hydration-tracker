@@ -85,6 +85,11 @@ export class Tab1Page implements OnInit {
     this.todaysDrinks = await this.storageService.get('todaysDrinks') || 0;
     this.lastDrink = await this.storageService.get('lastDrink');
 
+    const savedGoal = await this.storageService.get('dailyGoal');
+    if (savedGoal) {
+      this.dailyGoal = savedGoal; // Load daily goal from storage
+    }
+
     // Make sure percetnage does not exceed 100% on load
     if (Math.floor((this.currentProgress / this.dailyGoal) * 100) > 100) {
       this.progressPercentage = 100;
