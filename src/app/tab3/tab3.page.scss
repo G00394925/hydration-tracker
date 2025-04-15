@@ -10,8 +10,6 @@
 #settings-container {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    width: 100%;
 }
 
 ion-card {
@@ -31,23 +29,37 @@ ion-card-content {
     --color: black;
 }
 
+ion-label {
+    --color: black;
+}
+
 ion-item {
-    --padding-start: 0;
+    --padding-start: 5px;
     width: 100%;
     --background: white;
     --color: black;
-    
-    
-}
-
-ion-list {
-    width: 100%;
-    padding: 0;
+    --padding-top: 5px;
+    --padding-bottom: 5px;
+    margin: 5px;
+    --inner-border-width: 0;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 ion-input {
     background-color: rgb(201, 201, 201);
     width: 50%;
-    padding: 10px;
+    border-radius: 10px;
     --padding-start: 10px;
+    --padding-end: 10px;
+    margin: 5px;
+}
+
+ion-list-header {
+    --color: black;
+    --padding-start: 0;
+}
+
+ion-toggle {
+    --background: rgb(170, 170, 170) !important;
 }

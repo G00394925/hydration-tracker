@@ -1,13 +1,20 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonLabel, IonListHeader, IonItem, IonInput, IonNote } from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
+import { IonContent, IonCard, IonCardContent, IonLabel, IonItem, IonToggle, IonSelect, IonSelectOption, IonCardTitle, IonCardHeader } from '@ionic/angular/standalone';
+import { StorageService } from '../storage.service';
+
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
-  imports: [IonNote, IonInput, IonItem, IonListHeader, IonLabel, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent, ExploreContainerComponent, IonCardHeader, IonCardTitle],
+  imports: [IonCardHeader, IonCardTitle, IonToggle, IonItem, IonLabel, IonContent, IonCard, IonCardContent, IonSelect, IonSelectOption],
 })
+
 export class Tab3Page {
-  constructor() {}
+  constructor(private storageService: StorageService) {}
+
+
+  clearAllData() {
+    this.storageService.clear();
+  }
 }

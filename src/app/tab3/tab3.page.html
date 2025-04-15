@@ -1,16 +1,42 @@
 <ion-content [fullscreen]="true">
   <div id="main-div">
     <ion-card id="settings-container">
-      <ion-card-header>
-        <ion-card-title>Settings</ion-card-title>
-      </ion-card-header>
-
       <ion-card-content>
+
+        <!-- Daily Goals -->
+
         <ion-item>
           <ion-label>Daily Intake Goal</ion-label>
-          <ion-input type="number" placeholder="2000"></ion-input>
-          <ion-note slot="end">ml</ion-note>
+          <ion-select slot="end">
+            <ion-select-option value="1500">1500ml</ion-select-option>
+            <ion-select-option value="2000">2000ml</ion-select-option>
+            <ion-select-option value="2500">2500ml</ion-select-option>
+          </ion-select>
         </ion-item>
+
+        <ion-item>
+          <ion-label>Enable Reminders</ion-label>
+          <ion-toggle color="light" slot="end"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Reminder Interval</ion-label>
+          <ion-select slot="end">
+            <ion-select-option value="30">Every 30 minutes</ion-select-option>
+            <ion-select-option value="60">Every hour</ion-select-option>
+            <ion-select-option value="120">Every 2 hours</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>About</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Hydration Tracker v1.0</p>
+        <p>Track your daily water intake and stay hydrated!</p>
       </ion-card-content>
     </ion-card>
   </div>
