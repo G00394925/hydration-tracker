@@ -13,7 +13,7 @@ Chart.register(...registerables);
   styleUrls: ['tab2.page.scss'],
   imports: [IonProgressBar, IonCard, IonCardHeader, IonIcon, IonCardTitle, IonCardContent, IonContent,]
 })
-export class Tab2Page implements AfterViewInit {
+export class Tab2Page {
   @ViewChild('myChart') myChart: ElementRef | undefined;
   chart: any;
 
@@ -32,10 +32,12 @@ export class Tab2Page implements AfterViewInit {
 
   async ngOnInit() {
     await this.loadProgress(); // Load progress from storage
+    await this.createChart(); // Create chart
   }
 
   async ionViewWillEnter() {
     await this.loadProgress();
+    await this.createChart();
   }
 
   async loadProgress() {
@@ -48,45 +50,87 @@ export class Tab2Page implements AfterViewInit {
     this.maxStreak = await this.storageService.get('maxStreak') || 0;
   }
 
-  ngAfterViewInit(): void {
-    this.createChart();
+  async getHistory() {
+    try {
+      const historyData: any = await this.storageService.get('history') || {}; // Get history data froms storage
+      const labels: string[] = [];
+      const data: number[] = [];
+
+      const today = new Date(); // Get today's date
+      for (let i = 6; i >= 0; i--) {  // Loop through the last 7 days
+        const date = new Date(today);  // Create a date variable -- set to today
+        date.setDate(today.getDate() - i); // Previous days
+
+        const day = date.toLocaleDateString('en-US', { weekday: 'short'});
+        labels.push(day);
+
+        const intake = historyData[this.formatDate(date)] || 0;  // Get water intake for the day
+        data.push(intake);
+      }
+
+      return { labels, data };
+
+    } catch (e) {
+      console.error(e);
+      return { labels: [], data: [] }
+    }
   }
 
-  createChart() {
+  // Format date to YYYY-MM-DD as that's how the data is stored
+  formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  async createChart() {
     if(this.myChart?.nativeElement) {
-      this.chart = new Chart(this.myChart?.nativeElement, {
-        type: 'line',
-        data: {
-          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-          datasets: [{
-            label: 'Water Intake',
-            data: [2000, 1500, 1000, 3000, 2500, 2200, 1600],
-            backgroundColor: 'rgba(54, 162, 235, 0.8)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 2
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-              title: {
-                display: true,
-                text: 'Water Intake (ml)'
+      const history = await this.getHistory(); // Get history data
+
+      if(this.chart) {
+        this.chart.data.labels = history.labels;
+        this.chart.data.datasets[0].data = history.data;
+        this.chart.update();
+
+      } else {
+        this.chart = new Chart(this.myChart?.nativeElement, {
+          type: 'line',
+          data: {
+            labels: history.labels,
+            datasets: [{
+              label: 'Water Intake',
+              data: history.data,
+              backgroundColor: 'rgba(54, 162, 235, 0.8)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 2
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+                suggestedMax: 3000,
+                title: {
+                  display: true,
+                  text: 'Water Intake (ml)'
+                }
+              }
+            },
+            animations: {
+              tension: {
+                duration: 1000,
+                easing: 'linear',
+                from: 0,
+                to: 0,
+                loop: false
               }
             }
-          },
-          animations: {
-            tension: {
-              duration: 1000,
-              easing: 'linear',
-              from: 0,
-              to: 0,
-              loop: false
-            }
           }
-        }
-      })
+
+        })
+      }
+
     } else {
       console.error('Chart element not found');
     }

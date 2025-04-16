@@ -99,7 +99,7 @@ export class Tab1Page implements OnInit {
   }
 
   async addProgress(amount: number) {
-    const previousProgress = this.currentProgress; 
+    const previousProgress = this.currentProgress;
     this.currentProgress += amount  // Add amount onto current progress
     this.progressPercentage = Math.floor((this.currentProgress / this.dailyGoal) * 100);  // Convert progress to percentage
 
@@ -120,6 +120,8 @@ export class Tab1Page implements OnInit {
     await this.storageService.set('lastDrink', this.lastDrink);
     await this.storageService.set('todaysDrinks', this.todaysDrinks);
     await this.storageService.set('currentProgress', this.currentProgress);
+
+    await this.updateHistory(amount);  // Update history with new progress
   }
 
   async updateHistory(amount: number) {
@@ -158,7 +160,7 @@ export class Tab1Page implements OnInit {
   }
 
 
-  // Check if it's a new day -- reset progress and update streaks 
+  // Check if it's a new day -- reset progress and update streaks
   async checkForDayChange() {
     const lastDate = await this.storageService.get('lastDate');
     const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
