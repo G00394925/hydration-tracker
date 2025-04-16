@@ -122,6 +122,20 @@ export class Tab1Page implements OnInit {
     await this.storageService.set('currentProgress', this.currentProgress);
   }
 
+  async updateHistory(amount: number) {
+    const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+    const history = await this.storageService.get('history') || {}; // Get history from storage
+
+    // Update or create today's history
+    if(history[today]) {
+      history[today] += amount;
+      } else {
+      history[today] = amount;
+    }
+
+    await this.storageService.set('history', history); // Save updated history to storage
+  }
+
   getLastDrink(): string {
     // Get time of last drink in HH:MM format
     const now = new Date();
