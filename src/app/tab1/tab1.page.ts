@@ -131,16 +131,20 @@ export class Tab1Page implements OnInit {
   }
 
   updateStreak() {
-    
-    this.currentStreak += 1;
+    this.currentStreak += 1;  // Increment current streak
 
+    // Update max streak if record is broken
     if(this.currentStreak > this.maxStreak) {
       this.maxStreak = this.currentStreak;
     }
+
+    // Update streaks in storage
     this.storageService.set('currentStreak', this.currentStreak);
     this.storageService.set('maxStreak', this.maxStreak);
   }
 
+
+  // Check if it's a new day -- reset progress and update streaks 
   async checkForDayChange() {
     const lastDate = await this.storageService.get('lastDate');
     const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
