@@ -35,7 +35,7 @@ export class Tab2Page {
     await this.createChart(); // Create chart
   }
 
-  async ionViewWillEnter() {
+  async ionViewDidEnter() {
     await this.loadProgress();
     await this.createChart();
   }
