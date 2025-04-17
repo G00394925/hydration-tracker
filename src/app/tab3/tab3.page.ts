@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonContent, IonCard, IonCardContent, IonLabel, IonItem, IonToggle, IonSelect, IonSelectOption, IonCardTitle, IonCardHeader, IonIcon, IonFooter } from '@ionic/angular/standalone';
 import { StorageService } from '../storage.service';
+import { NotificationService } from '../notification.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class Tab3Page implements OnInit {
 
   async ngOnInit() {
     const savedGoal = await this.storageService.get('dailyGoal');
-    
+
     if (savedGoal) {
       this.dailyGoal = savedGoal;
     }
