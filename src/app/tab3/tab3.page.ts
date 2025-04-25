@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { IonContent, IonCard, IonCardContent, IonButton, IonLabel, IonItem, IonToggle, IonSelect, IonSelectOption, IonCardTitle, IonCardHeader, IonIcon, IonFooter } from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonCardContent, IonLabel, IonItem, IonToggle, IonSelect, IonSelectOption, IonCardTitle, IonCardHeader, IonIcon, IonFooter } from '@ionic/angular/standalone';
 import { StorageService } from '../storage.service';
 import { NotificationService } from '../notification.service';
-import { NgIf } from '@angular/common';
-
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
-  imports: [IonFooter, NgIf, IonButton, IonCardHeader, IonCardTitle, IonToggle, IonItem, IonLabel, IonContent, IonCard, IonCardContent, IonSelect, IonSelectOption],
+  imports: [IonFooter, IonCardHeader, IonCardTitle, IonToggle, IonItem, IonLabel, IonContent, IonCard, IonCardContent, IonSelect, IonSelectOption],
 })
 
 export class Tab3Page implements OnInit {
@@ -87,9 +85,5 @@ export class Tab3Page implements OnInit {
 
   private scheduleReminder() {
     this.notificationService.scheduleNotification(this.reminderInterval);
-  }
-
-  testNotification() {
-    this.notificationService.testNotification(5);
   }
 }
