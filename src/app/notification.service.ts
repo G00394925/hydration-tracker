@@ -22,7 +22,6 @@ export class NotificationService {
       console.log("Unsupported browser for notifications.");
       return Promise.resolve('denied');
     }
-
     return await Notification.requestPermission();
   }
 
@@ -44,12 +43,10 @@ export class NotificationService {
 
       // Save to storage
       await this.storageService.set('pushSubscription', subscriptionJson);
-
       return true;
 
     } catch (e) {
       console.error('Error subscribing to notifications', e);
-
       return false;
     }
   }
@@ -60,6 +57,7 @@ export class NotificationService {
       await this.swPush.unsubscribe();
       await this.storageService.remove('pushSubscription');
       return true;
+
     } catch (e) {
       console.error('Error unsubscribing from notifications', e);
       return false;
@@ -74,6 +72,7 @@ export class NotificationService {
 
   // Schedule a notification
   async scheduleNotification(minutes: number): Promise<void> {
+    // Check if the user is subscribed to notifications
     const isSubscribed = await this.isSubscribed();
     if (!isSubscribed) {
       console.log('User is not subscribed to notifications');
