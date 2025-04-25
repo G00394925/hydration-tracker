@@ -45,6 +45,7 @@ export class Tab2Page {
     this.currentProgress = await this.storageService.get('currentProgress') || 0;
     this.todaysDrinks = await this.storageService.get('todaysDrinks') || 0;
     this.lastDrink = await this.storageService.get('lastDrink');
+    this.dailyGoal = await this.storageService.get('dailyGoal') || 2000;
     this.progressPercentage = (this.currentProgress / this.dailyGoal);
     this.currentStreak = await this.storageService.get('currentStreak') || 0;
     this.maxStreak = await this.storageService.get('maxStreak') || 0;
