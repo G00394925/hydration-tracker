@@ -40,8 +40,10 @@ export class NotificationService {
         serverPublicKey: this.VAPID_PUBLIC_KEY
       });
 
+      const subscriptionJson = subscription.toJSON();
+
       // Save to storage
-      await this.storageService.set('pushSubscription', subscription);
+      await this.storageService.set('pushSubscription', subscriptionJson);
 
       return true;
 
@@ -87,4 +89,23 @@ export class NotificationService {
       }
     }, minutes * 60 * 1000)
   }
+
+    // Test notification with seconds (for development only)
+    async testNotification(seconds: number = 5): Promise<void> {
+      const isPermissionGranted = Notification.permission === 'granted';
+
+      if (!isPermissionGranted) {
+        console.log('Notification permission not granted. Request permission first.');
+        return;
+      }
+
+      console.log(`Test notification will appear in ${seconds} seconds`);
+
+      setTimeout(() => {
+        new Notification('Test Notification', {
+          body: 'This is a test notification!',
+          icon: 'assets/icon/logo.png'
+        });
+      }, seconds * 1000); // Convert seconds to milliseconds
+    }
 }
