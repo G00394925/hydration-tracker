@@ -35,12 +35,14 @@ export class Tab3Page implements OnInit {
     }
   }
 
+  // Reset daily progress
   resetProgress() {
     this.storageService.set('currentProgress', 0);
     this.storageService.set('todaysDrinks', 0);
     this.storageService.set('lastDrink', '');
   }
 
+  // Reset everything 
   clearAllData() {
     this.storageService.clear();
   }
@@ -56,8 +58,9 @@ export class Tab3Page implements OnInit {
     this.storageService.set('dailyGoal', newGoal);
   }
 
+  // Toggle notifications
   async toggleNotifications(event: any) {
-    const enabled = event.detail.checked;
+    const enabled = event.detail.checked; // Get the value of the toggle switch
 
     if(enabled) {
       const success = await this.notificationService.subscribeToNotifications();
@@ -73,11 +76,13 @@ export class Tab3Page implements OnInit {
 
   }
 
+  // Update reminder interval
   updateReminderInterval(event: any) {
-    const interval = event.detail.value;
-    this.reminderInterval = interval;
-    this.storageService.set('reminderInterval', interval);
+    const interval = event.detail.value; // Get the selected interval from the event
+    this.reminderInterval = interval; // Update the reminder interval
+    this.storageService.set('reminderInterval', interval); // Save the new interval to storage
 
+    // If notifications are enabled, reschedule the reminder
     if (this.notificationsEnabled) {
       this.scheduleReminder();
     }

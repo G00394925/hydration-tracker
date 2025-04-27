@@ -84,6 +84,8 @@ export class Tab1Page implements OnInit {
     this.currentProgress = await this.storageService.get('currentProgress') || 0;
     this.todaysDrinks = await this.storageService.get('todaysDrinks') || 0;
     this.lastDrink = await this.storageService.get('lastDrink');
+    this.currentStreak = await this.storageService.get('currentStreak') || 0;
+    this.maxStreak = await this.storageService.get('maxStreak') || 0;
 
     const savedGoal = await this.storageService.get('dailyGoal');
     if (savedGoal) {

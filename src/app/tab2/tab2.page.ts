@@ -30,16 +30,6 @@ export class Tab2Page {
     addIcons({ flame, trophy })
   }
 
-  async ngOnInit() {
-    await this.loadProgress(); // Load progress from storage
-    await this.createChart(); // Create chart
-  }
-
-  async ionViewDidEnter() {
-    await this.loadProgress();
-    await this.createChart();
-  }
-
   async loadProgress() {
     // Get progress from storage
     this.currentProgress = await this.storageService.get('currentProgress') || 0;
@@ -86,16 +76,21 @@ export class Tab2Page {
   }
 
   async createChart() {
-    if(this.myChart?.nativeElement) {
+    if (this.myChart?.nativeElement) {
       const history = await this.getHistory(); // Get history data
 
-      if(this.chart) {
+      if (this.chart) {
+        // Update existing chart
         this.chart.data.labels = history.labels;
         this.chart.data.datasets[0].data = history.data;
+        // ALSO update options if they depend on dynamic data like dailyGoal
+        this.chart.options.scales.y.max = 5000;
+        this.chart.options.scales.y.ticks = { stepSize: 1000 }; // Set step size for y-axis ticks
         this.chart.update();
 
       } else {
-        this.chart = new Chart(this.myChart?.nativeElement, {
+        // Create new chart
+        this.chart = new Chart(this.myChart.nativeElement, {
           type: 'line',
           data: {
             labels: history.labels,
@@ -111,7 +106,10 @@ export class Tab2Page {
             scales: {
               y: {
                 beginAtZero: true,
-                suggestedMax: 3000,
+                max: 5000,
+                ticks: {
+                  stepSize: 1000
+                },
                 title: {
                   display: true,
                   text: 'Water Intake (ml)'
@@ -128,12 +126,37 @@ export class Tab2Page {
               }
             }
           }
-
         })
       }
 
     } else {
       console.error('Chart element not found');
     }
+  }
+
+
+  async updateChart() {
+    if (this.chart) {
+      const history = await this.getHistory();
+
+      this.chart.data.labels = history.labels;
+      this.chart.data.datasets[0].data = history.data;
+      this.chart.options.scales.y.suggestedMax = 5000;
+      this.chart.options.scales.y.ticks = { stepSize: 1000 };
+      this.chart.update();
+    } else {
+      // If chart doesn't exist, create it
+      await this.createChart();
+    }
+  }
+
+  async ngAfterViewInit() {
+    await this.loadProgress(); // Load data first
+    await this.createChart(); // Create chart once view is ready
+  }
+
+  async ionViewWillEnter() {
+    await this.loadProgress(); // Load latest data
+    await this.updateChart(); // Update the chart before it's shown
   }
 }
