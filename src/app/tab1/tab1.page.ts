@@ -45,12 +45,18 @@ export class Tab1Page implements OnInit {
 
   // Change radius of progress circle based on screen size
   calculateRadius(): number {
-    // Smaller screens
-    if(this.windowWidth < 360 || this.windowHeight < 800) {
+    // Extra small screens
+    if(this.windowWidth < 360 || this.windowHeight < 600) {
+      return 45;
+
+    // Small screens
+    } else if(this.windowWidth < 360 || this.windowHeight < 800) {
       return 70;
+
     // Medium screens
     } else if (this.windowWidth < 480) {
       return 100;
+      
     } else {
       return 150;
     }
